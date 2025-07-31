@@ -1,8 +1,8 @@
 export const giscusConfig = {
   repo: "json0368/blog",
-  repoId: "R_kgDOLo2yWA",
-  category: "Announcements",
-  categoryId: "DIC_kwDOLo2yWM4CknAK",
+  repoId: "R_kgDOPV3B1w",
+  category: "General",
+  categoryId: "DIC_kwDOPV3B184CtoPj",
   mapping: "title",
   inputPosition: "top",
   lang: "zh-CN",
