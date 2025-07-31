@@ -1,0 +1,30 @@
+{
+  "github": {
+    "silent": true
+  },
+  "framework": "vitepress",
+  "installCommand": "git pull --unshallow https://github.com/json0368/blog master && pnpm install",
+  "buildCommand": "vitepress build docs --base /",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/blog/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/posts/:path*",
+      "destination": "/breves/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/feed.rss",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml; charset=utf-8"
+        }
+      ]
+    }
+  ]
+}
