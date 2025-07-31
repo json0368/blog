@@ -47,14 +47,14 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: BASE_URL,
+  base: isNetlify ? "/" : BASE_URL,
   cleanUrls: true,
   title: "我的个人博客",
   head: headConfig as HeadConfig[],
   description: "",
   lang: "zh-CN",
   sitemap: {
-    hostname: DOMAIN + BASE_URL,
+    hostname: DOMAIN + (isNetlify ? "/" : BASE_URL),
   },
   lastUpdated: true,
   markdown: markdownConfig,
