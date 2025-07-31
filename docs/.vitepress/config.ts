@@ -8,6 +8,8 @@ import { viteConfig } from "./configs/viteConfig";
 import { sidebarConfig } from "./configs/sidebarConfig";
 import { withSidebar } from "vitepress-sidebar";
 
+const isNetlify = process.env.NETLIFY === "true";
+
 function fixSidebarLinks(
   sidebar: DefaultTheme.SidebarItem[]
 ): DefaultTheme.SidebarItem[] {
@@ -33,7 +35,8 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
   for (const [path, config] of Object.entries(sidebar)) {
     if ("items" in config && Array.isArray(config.items)) {
       processedSidebar[path] = {
-        base: config.base,
+        // base: config.base,
+        base: isNetlify ? "/" : config.base,
         items: fixSidebarLinks(config.items),
       };
     }
@@ -46,7 +49,7 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
 export default defineConfig({
   base: BASE_URL,
   cleanUrls: true,
-  title: "我的个人博客", 
+  title: "我的个人博客",
   head: headConfig as HeadConfig[],
   description: "",
   lang: "zh-CN",
