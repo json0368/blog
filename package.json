@@ -8,7 +8,8 @@
     "serve": "vitepress serve docs",
     "preview": "pnpm build && vitepress preview docs",
     "prepare": "husky",
-    "deploy": "vitepress build docs && gh-pages -d docs/.vitepress/dist"
+    "deploy": "vitepress build docs && gh-pages -d docs/.vitepress/dist",
+    "netlify": "npm run clean && npm run build"
   },
   "lint-staged": {
     "**/*.{ts,js,vue}": [
