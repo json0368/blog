@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>我</title>
+        <link>https://json0368.netlify.app</link>
+        <description>To trace the bright moonlight</description>
+        <lastBuildDate>Thu, 31 Jul 2025 09:07:19 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>zh-cn</language>
+        <copyright>Copyright (c) 2024-present, Mark Chen</copyright>
+    </channel>
+</rss>

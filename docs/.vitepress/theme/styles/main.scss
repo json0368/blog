@@ -1,0 +1,244 @@
+@use "colors" as *;
+@use "../components/ElysiumUI/_config/theme_colors" as colors;
+@use "fonts";
+@use "sass:color";
+
+%transition-base {
+  transition: all 0.3s ease-in-out;
+}
+
+%image-hover {
+  cursor: pointer;
+  @extend %transition-base;
+  &:hover {
+    transform: scale(1.002);
+    box-shadow: 0 4px 24px color.adjust(colors.$light-text-base, $alpha: -0.97);
+  }
+}
+
+%bold-font {
+  font-weight: 700;
+  font-family: "Wix Madefor", "HarmonyOS Sans SC Bold", fonts.$font-family-base;
+}
+
+body {
+  font-size: 16px !important;
+  line-height: 24px;
+  font-family: fonts.$font-family-base !important;
+  font-weight: 450;
+}
+
+html.dark {
+  figure img,
+  .elysium-ui__card--cover {
+    filter: brightness(0.8);
+  }
+}
+
+.VPImage.logo {
+  border-radius: 3px;
+}
+
+.VPNav {
+  .VPNavBar:not(.home .top) {
+    .content-body.content-body.content-body {
+      backdrop-filter: blur(10px);
+      background: radial-gradient(
+        $color-accent-base,
+        $color-accent-transparent 2px
+      );
+      background-size: 3px 3px;
+
+      @media (max-width: 767px) {
+        column-gap: 0.5rem;
+        background: none;
+      }
+    }
+  }
+  .VPNavBar:not(.has-sidebar) {
+    background-color: transparent !important;
+  }
+}
+
+.VPFooter {
+  .message,
+  .copyright {
+    color: $color-accent-text-tertiary;
+  }
+}
+
+kbd {
+  background-color: var(--vp-c-bg-soft);
+  border: solid 1px var(--vp-c-border);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.custom-block p > code {
+  padding: 1px 4px;
+  backdrop-filter: brightness(60%);
+  border: solid 1px $color-accent-code;
+  color: $color-accent-code;
+}
+
+.edit-info.edit-info {
+  display: none;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+
+  figcaption {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: $color-accent-text-tertiary;
+    text-align: center;
+  }
+}
+
+mark {
+  background-color: var(--color-accent-mark-background);
+  color: color-contrast(
+    var(--color-accent-mark-background) vs var(--vp-c-text-1),
+    #fff
+  );
+  border-radius: 2px;
+}
+
+.spoiler {
+  color: transparent;
+  background-color: $color-accent;
+  padding: 0 4px;
+  border-radius: 4px;
+  @extend %transition-base;
+  cursor: help;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    background-color: transparent;
+  }
+}
+
+a.title span,
+.VPNavBarMenuLink.active,
+.item h2.text,
+.font-bold,
+.pager-link .title,
+.VPSidebarItem.is-active .text.text {
+  @extend %bold-font;
+}
+
+.vp-doc {
+  [class*="language-"] code .highlighted {
+    background-color: $color-accent-quaternary;
+  }
+
+  :not(pre, h1, h2, h3, h4, h5, h6) > code {
+    color: $color-accent-code;
+  }
+
+  code {
+    font-family: fonts.$font-family-mono;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: $color-accent-secondary;
+    text-decoration-thickness: 2px;
+
+    &::before {
+      color: $color-accent-tertiary;
+      @extend %transition-base;
+    }
+
+    &:hover::before {
+      color: $color-accent;
+    }
+  }
+
+  s {
+    color: $color-accent-text-tertiary;
+    text-decoration-thickness: 2px;
+  }
+
+  .elysium-ui__image {
+    max-width: 100%;
+    border-radius: 3px;
+    @extend %image-hover;
+  }
+
+  h1 {
+    margin: 0.67em 0;
+  }
+
+  h2 {
+    border: none;
+    margin-top: 16px;
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i},
+    h#{$i} a {
+      @extend %bold-font;
+    }
+  }
+
+  .title,
+  strong,
+  .custom-block-title,
+  thead,
+  summary {
+    @extend %bold-font;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  table {
+    display: table;
+    width: 100%;
+
+    td {
+      line-height: 22px;
+      border: inherit;
+    }
+
+    th,
+    .arco-table-th {
+      border: none;
+    }
+
+    tr {
+      background-color: transparent;
+
+      &:nth-child(2n) {
+        background-color: $color-accent-quinary;
+      }
+
+      &:hover {
+        background-color: $color-accent-quaternary;
+      }
+    }
+  }
+
+  // 内嵌视频，通常是哔哩哔哩
+  iframe {
+    margin-top: 16px;
+    width: 100%;
+    height: 360px;
+  }
+}
+
+.DocSearch {
+  --docsearch-primary-color: $color-accent !important;
+}
