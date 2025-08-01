@@ -6,7 +6,8 @@ export const userProfile: ProfileProps = {
     "en-US": "json0368",
   },
   email: "mark_chen@blue-archive.io",
-  avatar: "https://avatars.githubusercontent.com/u/9006264?v=4",
+  avatar:
+    "https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/avatar/avatar.jpg",
   bio: "Per aspera ad astra",
   social: [
     {

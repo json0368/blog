@@ -12,7 +12,7 @@ export const headConfig = [
     "link",
     {
       rel: "icon",
-      href: "https://avatars.githubusercontent.com/u/9006264?v=4",
+      href: "https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/avatar/avatar.jpg",
     },
   ],
   [
