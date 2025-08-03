@@ -1,9 +1,9 @@
-```
+---
 title: "模型早退（early exiting）"
 tags:
-- 模型早退
-- 人工智能
-```
+  - 模型早退
+  - 人工智能
+---
 
 # 模型早退（early exiting）
 
