@@ -35,8 +35,7 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
   for (const [path, config] of Object.entries(sidebar)) {
     if ("items" in config && Array.isArray(config.items)) {
       processedSidebar[path] = {
-        // base: config.base,
-        base: isNetlify ? "/" : config.base,
+        base: config.base,
         items: fixSidebarLinks(config.items),
       };
     }
