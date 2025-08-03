@@ -48,7 +48,7 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
 export default defineConfig({
   base: isNetlify ? "/" : BASE_URL,
   cleanUrls: true,
-  title: "我的个人博客",
+  title: "json0368的个人博客",
   head: headConfig as HeadConfig[],
   description: "",
   lang: "zh-CN",

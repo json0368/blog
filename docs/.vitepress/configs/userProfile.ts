@@ -2,7 +2,7 @@ import type { ProfileProps } from "../theme/components/ElysiumUI/types/ProfilePr
 
 export const userProfile: ProfileProps = {
   name: {
-    "zh-CN": "我",
+    "zh-CN": "json0368",
     "en-US": "json0368",
   },
   email: "mark_chen@blue-archive.io",

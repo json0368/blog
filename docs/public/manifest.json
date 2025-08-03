@@ -1,11 +1,11 @@
 {
-  "name": "我的博客",
-  "short_name": "我的博客",
+  "name": "json0368的博客",
+  "short_name": "json0368的博客",
   "icons": [
     {
-      "src": "https://cdn.sa.net/2025/03/05/mzcXIYvrSTV2Af3.webp",
+      "src": "https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/avatar/avatar.jpg",
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/jpg"
     }
   ],
   "start_url": "/",
