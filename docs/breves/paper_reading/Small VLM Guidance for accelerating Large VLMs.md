@@ -4,7 +4,6 @@ tags:
   - 大小模型协同
   - VLM
   - 论文阅读
-date: 2025-08-05
 ---
 
 # Small VLM Guidance for accelerating Large VLMs
