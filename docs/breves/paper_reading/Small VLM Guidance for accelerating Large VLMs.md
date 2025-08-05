@@ -10,8 +10,8 @@ tags:
 
 ## 论文与代码
 
-论文: [A Stitch in Time Saves Nine: Small VLM is a Precise Guidance for Accelerating Large VLMs](https://arxiv.org/abs/2412.03324)
-代码: [GitHub - SGL](https://https://github.com/NUS-HPC-AI-Lab/SGL)
+- 论文: [A Stitch in Time Saves Nine: Small VLM is a Precise Guidance for Accelerating Large VLMs](https://arxiv.org/abs/2412.03324)
+- 代码: [GitHub - SGL](https://github.com/NUS-HPC-AI-Lab/SGL)
 
 ## 核心思想
 
