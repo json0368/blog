@@ -4,6 +4,7 @@ tags:
   - 大小模型协同
   - VLM
   - 论文阅读
+date: 2025-08-05
 ---
 
 # Small VLM Guidance for accelerating Large VLMs
@@ -33,9 +34,14 @@ SGP的目标是利用 small VLM 精准识别并剪除 large VLM 中不重要的 
 
 1. **前置推理**：首先，将输入的图像和文本提示（问题）送入一个 small VLM（例如，InternVL2-2B）进行一次完整的推理，生成答案。
 2. **聚合全局注意力图**：在 small VLM 推理的过程中，动态地聚合其语言模型部分（LMS）所有层、所有头的注意力分数，形成一个全局的重要性排名。这个过程分为两个阶段：
-   1. **Pre-filling stage**：此阶段处理输入的图像和文本令牌。SGP会关注所有 visual token 从所有 text prompt token 那里获得的注意力分数。将这些分数在所有层和所有注意力头之间累加，得到预填充阶段的总注意力分数 $A^P$。公式为 $$A^{P}=\sum_{j=1}^{L}\sum_{k=1}^{H}\overline{A}_{j,k}^{p}$$
-   2. **Decoding stage**：此阶段自回归地生成答案。SGP会关注所有 visual token 从每一个新生成的 answer token 那里获得的注意力分数。同样，将这些分数在所有生成步骤、所有层和所有头之间累加，得到解码阶段的总分 $A^D$。公式为 $$A^{D}=\sum_{i=1}^{N_{G}}\sum_{j=1}^{L}\sum_{k=1}^{H}A_{i,j,k}^{D}$$
-
+   1. **Pre-filling stage**：此阶段处理输入的图像和文本令牌。SGP会关注所有 visual token 从所有 text prompt token 那里获得的注意力分数。将这些分数在所有层和所有注意力头之间累加，得到预填充阶段的总注意力分数 $A^P$。公式为
+      $$
+      A^{P}=\sum_{j=1}^{L}\sum_{k=1}^{H}\overline{A}_{j,k}^{p}
+      $$
+   2. **Decoding stage**：此阶段自回归地生成答案。SGP会关注所有 visual token 从每一个新生成的 answer token 那里获得的注意力分数。同样，将这些分数在所有生成步骤、所有层和所有头之间累加，得到解码阶段的总分 $A^D$。公式为
+      $$
+      A^{D}=\sum_{i=1}^{N_{G}}\sum_{j=1}^{L}\sum_{k=1}^{H}A_{i,j,k}^{D}
+      $$
 3. **计算最终重要性分数**：将两个阶段的分数相加，得到每个 visual token 最终的、综合的重要性分数 $A=A^P+A^D$。这个分数全面地反映了 visual token 与输入问题及生成答案的关联程度。
 
 ### 第二步：在 large VLM 中执行剪枝
@@ -53,10 +59,21 @@ SGP虽然有效，但引入 small VLM 本身会带来额外的计算开销。为
 1. **计算决策分数**：在 small VLM 完成推理并生成答案后，SEE会计算一个最终的 “early-exiting decision score” $S$，以判断其答案的可靠性。
 
 2. **分数的构成**：这个决策分数由两个子分数平均而来：
-   1. Confidence Score ( $S_{confidence}$)：这是一个衡量模型自信程度的直接指标，通过计算生成答案序列的长度归一化概率得到。公式为： $$\mathcal{S}_{confidence}=\exp\left\{\frac{1}{N_{G}}\log P(x_{G}^{1},...,x_{G}^{N_{G}})\right\}$$
-      - 其中 $N_{G}$ 是生成令牌的数量，$P(⋅)$ 是生成序列的概率，其定义为 $$P(x_{G}^{1},...,x_{G}^{N_{G}})=\prod_{i=1}^{N_{G}}P(x_{G}^{i}|LM^{S}(x_{I},x_{T},x_{G}^{1:i-1}))$$。概率越高，代表模型对这个答案越“自信”。
+   1. Confidence Score ( $S_{confidence}$)：这是一个衡量模型自信程度的直接指标，通过计算生成答案序列的长度归一化概率得到。公式为：
 
-   2. Consistency Score ( $S_{consistency}$)：这是论文提出的一个创新指标。其假设是：如果 small VLM 的答案是正确的，那么即便使用SGP剪枝掉一部分 visual token 后，它的预测结果也应该是一致的。因此，该分数通过计算在使用SGP剪枝后的 visual token 下，small VLM 生成相同答案的概率来衡量。其公式为 $$\mathcal{S}_{consistency}=\prod_{i=1}^{N_{G}}P(x_{G}^{i}|LM^{S^{\prime}}(x_{I},x_{T},x_{G}^{1:i-1}))$$
+      $$
+      \mathcal{S}_{confidence}=\exp\left\{\frac{1}{N_{G}}\log P(x_{G}^{1},...,x_{G}^{N_{G}})\right\}
+      $$
+      - 其中 $N_{G}$ 是生成令牌的数量，$P(⋅)$ 是生成序列的概率，其定义为
+        $$
+        P(x_{G}^{1},...,x_{G}^{N_{G}})=\prod_{i=1}^{N_{G}}P(x_{G}^{i}|LM^{S}(x_{I},x_{T},x_{G}^{1:i-1}))
+        $$
+        概率越高，代表模型对这个答案越“自信”。
+
+   2. Consistency Score ( $S_{consistency}$)：这是论文提出的一个创新指标。其假设是：如果 small VLM 的答案是正确的，那么即便使用SGP剪枝掉一部分 visual token 后，它的预测结果也应该是一致的。因此，该分数通过计算在使用SGP剪枝后的 visual token 下，small VLM 生成相同答案的概率来衡量。其公式为
+      $$
+      \mathcal{S}_{consistency}=\prod_{i=1}^{N_{G}}P(x_{G}^{i}|LM^{S^{\prime}}(x_{I},x_{T},x_{G}^{1:i-1}))
+      $$
       - 其中 $LM^{S^{\prime}}$ 代表使用了剪枝后 visual token 的小型语言模型。这个计算非常高效，因为它是在已知答案的情况下进行并行计算，且剪枝率很高（如95%），耗时不到 small VLM 初始推理时间的10%。
 
 3. **做出决策**：最终决策分数 $\mathcal{S}=\frac{1}{2}(\mathcal{S}_{confidence}+\mathcal{S}_{consistency})$。将该分数与一个预设的阈值进行比较。
