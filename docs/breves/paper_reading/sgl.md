@@ -16,7 +16,7 @@ tags:
 ## 核心思想
 
 论文的核心是提出了一种名为 **SGL** **(Small VLM Guidance for accelerating Large VLMs)** 的无训练方法，旨在不牺牲过多性能的前提下，显著提升大型VLM（视觉语言模型）的推理效率。其精髓在于巧妙地利用一个 small VLM 来指导和加速一个 large VLM。
-![](https://ucn97u24pg26.feishu.cn/space/api/box/stream/download/asynccode/?code=NWFjYWM1MjE4Nzc5MjJjNWQ3N2M2MWRkZmRkMzBmMjVfZ0VJcFZNN01MTjJBb2F2UHdtaEI4NWZKWW9kc1U1TlNfVG9rZW46V1M2TGJ1NFdtb3RXaXp4cHJOMGNnSEdXbnZlXzE3NTQzNzI1Mzk6MTc1NDM3NjEzOV9WNA)
+![overview](https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/breves/paper_reading/sgl/overview.png)
 
 ## 方法建立
 
@@ -52,7 +52,9 @@ SGP的目标是利用 small VLM 精准识别并剪除 large VLM 中不重要的 
 ## SEE: Small VLM Early Exiting
 
 SGP虽然有效，但引入 small VLM 本身会带来额外的计算开销。为了最大化利用这部分开销，SGL设计了SEE机制。其核心思想是，对于很多“简单”问题，small VLM 的回答已经足够准确，没有必要再启动昂贵的 large VLM。
-![](https://ucn97u24pg26.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWVkM2I0ZDBmMDIzMmM1NTMwYjc5ZjdhMjA3YTRmYjJfdEJOZnFTRmcyWjJIdHJRRmE4bUlNeWxJdUlSNFA3bGtfVG9rZW46VHMyc2JRSkphbzc1NEp4SG5yS2N3bHVJbnVmXzE3NTQzNzI1Mzk6MTc1NDM3NjEzOV9WNA)
+
+![performance](https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/breves/paper_reading/sgl/performance.png)
+
 **决策过程如下：**
 
 1. **计算决策分数**：在 small VLM 完成推理并生成答案后，SEE会计算一个最终的 “early-exiting decision score” $S$，以判断其答案的可靠性。
