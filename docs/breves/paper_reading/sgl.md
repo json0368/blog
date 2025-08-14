@@ -16,6 +16,7 @@ tags:
 ## 核心思想
 
 论文的核心是提出了一种名为 **SGL** **(Small VLM Guidance for accelerating Large VLMs)** 的无训练方法，旨在不牺牲过多性能的前提下，显著提升大型VLM（视觉语言模型）的推理效率。其精髓在于巧妙地利用一个 small VLM 来指导和加速一个 large VLM。
+
 ![overview](https://cdn.jsdelivr.net/gh/json0368/blog@main/docs/data/breves/paper_reading/sgl/overview.png)
 
 ## 方法建立
