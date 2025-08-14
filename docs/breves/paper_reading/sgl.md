@@ -1,7 +1,7 @@
 ---
 title: "Small VLM Guidance for accelerating Large VLMs"
 tags:
-  - 大小模型协同
+  - 人工智能
   - VLM
   - 论文阅读
 ---
