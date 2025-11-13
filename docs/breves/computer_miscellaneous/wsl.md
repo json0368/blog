@@ -1,11 +1,11 @@
 ---
-title: "Small VLM Guidance for accelerating Large VLMs"
+title: "WSL 迁移方法"
 tags:
   - 计算机杂项
   - wsl
 ---
 
-# WSL 迁移
+# WSL 迁移方法
 
 最近 C 盘爆了QwQ，于是决定把 wsl 迁移到 E 盘，记录一下过程。
 
